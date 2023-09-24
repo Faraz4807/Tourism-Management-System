@@ -9,6 +9,7 @@ public class Login extends JFrame {
         setSize(900, 450);
         setLocation(250, 150);
         setLayout(null);
+        
         JPanel p1 = new JPanel();
         p1.setBackground(new Color(100, 217, 250));
         p1.setBounds(0, 0, 400, 400);
@@ -32,7 +33,7 @@ public class Login extends JFrame {
         // UserName
         JLabel lblusername = new JLabel("Username");
         lblusername.setBounds(60, 20, 100, 40);
-        lblusername.setFont(new Font("SAN SERIF", Font.PLAIN, 20));
+        lblusername.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
         p2.add(lblusername);
 
         JTextField tfusername = new JTextField();
@@ -44,18 +45,18 @@ public class Login extends JFrame {
 
         // pasword
         JLabel lblpassword = new JLabel("Password");
-        lblpassword.setBounds(60, 140, 100, 40);
-        lblpassword.setFont(new Font("SAN SERIF", Font.PLAIN, 20));
+        lblpassword.setBounds(60, 120, 100, 40);
+        lblpassword.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
         p2.add(lblpassword);
 
         JTextField tfpassword = new JTextField();
-        tfpassword.setBounds(60, 180, 300, 30);
+        tfpassword.setBounds(60, 160, 300, 30);
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         tfpassword.setBorder(new LineBorder(new Color(95, 93, 217)));
         p2.add(tfpassword);
 // Login Buuton
         JButton login = new JButton("Login");
-        login.setBounds(60, 250, 120, 25);
+        login.setBounds(60, 240, 120, 25);
         login.setBackground(new Color(
                 138, 139, 148));
         p2.add(login);
@@ -65,7 +66,7 @@ public class Login extends JFrame {
         
         // signUp Button
         JButton SignUp = new JButton("SignUp");
-        SignUp .setBounds(250, 250, 120, 25);
+        SignUp .setBounds(250, 240, 120, 25);
         SignUp.setBackground(new Color(
                 138, 139, 148));
         p2.add(SignUp);
