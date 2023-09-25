@@ -12,7 +12,7 @@ public class Signup extends JFrame implements ActionListener {
     Signup() {
         setBounds(280, 180, 800, 400);
         setLayout(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // setExtendedState(JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(new Color(248, 240, 229));
 
         JPanel p1 = new JPanel();
@@ -145,7 +145,7 @@ public class Signup extends JFrame implements ActionListener {
                 Conn c = new Conn();
                 c.s.executeUpdate(query);
 
-                JOptionPane.showMessageDialog(null,"Account created succesfully");
+                JOptionPane.showMessageDialog(null,"Congratulations ! Account created succesfully");
                 setVisible(false);
                 new Login();
             } catch (Exception e) {
