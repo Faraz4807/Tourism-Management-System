@@ -2,12 +2,14 @@ package travel.management;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class Login extends JFrame implements ActionListener {
         JButton login, SignUp, Fgtpass;
+        JTextField tfpassword, tfusername;
 
         Login() {
                 setSize(900, 450);
@@ -40,7 +42,7 @@ public class Login extends JFrame implements ActionListener {
                 lblusername.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
                 p2.add(lblusername);
 
-                JTextField tfusername = new JTextField();
+                tfusername = new JTextField();
                 tfusername.setBounds(60, 60, 300, 30);
                 tfusername.setBorder(BorderFactory.createEmptyBorder());
                 tfusername.setBorder(new LineBorder(new Color(95, 93, 217)));
@@ -53,7 +55,7 @@ public class Login extends JFrame implements ActionListener {
                 lblpassword.setFont(new Font("SAN SERIF", Font.PLAIN, 18));
                 p2.add(lblpassword);
 
-                JTextField tfpassword = new JTextField();
+                tfpassword = new JTextField();
                 tfpassword.setBounds(60, 160, 300, 30);
                 tfpassword.setBorder(BorderFactory.createEmptyBorder());
                 tfpassword.setBorder(new LineBorder(new Color(95, 93, 217)));
@@ -63,7 +65,7 @@ public class Login extends JFrame implements ActionListener {
                 login.setBounds(60, 240, 120, 25);
                 login.setBackground(new Color(
                                 138, 139, 148));
-                
+
                 login.setForeground(new Color(204, 237, 226));
                 login.setFont(new Font("SAN SERIF", Font.PLAIN, 15));
                 login.setBorder(new LineBorder(new Color(95, 93, 217)));
@@ -75,18 +77,18 @@ public class Login extends JFrame implements ActionListener {
                 SignUp.setBounds(250, 240, 120, 25);
                 SignUp.setBackground(new Color(
                                 138, 139, 148));
-               
+
                 SignUp.setForeground(new Color(204, 237, 226));
                 SignUp.setFont(new Font("SAN SERIF", Font.PLAIN, 15));
                 SignUp.setBorder(new LineBorder(new Color(95, 93, 217)));
                 SignUp.addActionListener(this);
-                 p2.add(SignUp);
+                p2.add(SignUp);
                 // Forgot Password
                 Fgtpass = new JButton("Forgot Password");
                 Fgtpass.setBounds(150, 300, 120, 20);
                 Fgtpass.setBackground(new Color(
                                 138, 139, 148));
-                
+
                 Fgtpass.setForeground(new Color(204, 237, 226));
                 Fgtpass.setFont(new Font("SAN SERIF", Font.PLAIN, 13));
                 Fgtpass.setBorder(new LineBorder(new Color(95, 93, 217)));
@@ -104,13 +106,31 @@ public class Login extends JFrame implements ActionListener {
 
         public void actionPerformed(ActionEvent ae) {
                 if (ae.getSource() == login) {
-                        setVisible(false);
+                        // setVisible(false);
+                        try {
+                                String username = tfusername.getText();
+                                String passw = tfpassword.getText();
 
-                      
+                                String query = "select * from account where username = '" + username
+                                                + "' AND password = '" + passw + "'";
+                                Conn c = new Conn();
+                                ResultSet rs = c.s.executeQuery(query);
+
+                                if (rs.next()) {
+                                        setVisible(false);
+                                        new Loading(username);
+                                } else {
+                                        JOptionPane.showMessageDialog(null, "incorrrect username or password");
+                                }
+
+                        } catch (Exception e) {
+                                e.printStackTrace();
+                        }
+
                 } else if (ae.getSource() == SignUp) {
                         setVisible(false);
                         new Signup();
-                }else{
+                } else {
                         setVisible(false);
                         new Forgot();
                 }
