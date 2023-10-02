@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 import javax.swing.*;
+import javax.swing.BorderFactory;
 import javax.swing.border.LineBorder;
 
 public class Login extends JFrame implements ActionListener {
@@ -67,6 +68,7 @@ public class Login extends JFrame implements ActionListener {
                                 138, 139, 148));
 
                 login.setForeground(new Color(204, 237, 226));
+
                 login.setFont(new Font("SAN SERIF", Font.PLAIN, 15));
                 login.setBorder(new LineBorder(new Color(95, 93, 217)));
                 login.addActionListener(this);
