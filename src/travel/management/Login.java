@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.sql.*;
 
 import javax.swing.*;
-import javax.swing.BorderFactory;
 import javax.swing.border.LineBorder;
 
 public class Login extends JFrame implements ActionListener {
@@ -64,8 +63,7 @@ public class Login extends JFrame implements ActionListener {
                 // Login Buuton
                 login = new JButton("Login");
                 login.setBounds(60, 240, 120, 25);
-                login.setBackground(new Color(
-                                138, 139, 148));
+                login.setBackground(new Color(54, 47, 217));
 
                 login.setForeground(new Color(204, 237, 226));
 
@@ -77,8 +75,7 @@ public class Login extends JFrame implements ActionListener {
                 // signUp Button
                 SignUp = new JButton("SignUp");
                 SignUp.setBounds(250, 240, 120, 25);
-                SignUp.setBackground(new Color(
-                                138, 139, 148));
+                SignUp.setBackground(new Color(54, 47, 217));
 
                 SignUp.setForeground(new Color(204, 237, 226));
                 SignUp.setFont(new Font("SAN SERIF", Font.PLAIN, 15));
@@ -88,8 +85,7 @@ public class Login extends JFrame implements ActionListener {
                 // Forgot Password
                 Fgtpass = new JButton("Forgot Password");
                 Fgtpass.setBounds(150, 300, 120, 20);
-                Fgtpass.setBackground(new Color(
-                                138, 139, 148));
+                Fgtpass.setBackground(new Color(54, 47, 217));
 
                 Fgtpass.setForeground(new Color(204, 237, 226));
                 Fgtpass.setFont(new Font("SAN SERIF", Font.PLAIN, 13));
