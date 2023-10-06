@@ -27,7 +27,8 @@ public class Signup extends JFrame implements ActionListener {
         lblusername.setBounds(30, 20, 100, 40);
         lblusername.setFont(new Font("SAN SERIF", Font.BOLD, 15));
         p1.add(lblusername);
-
+     
+       
         tfusername = new JTextField();
         tfusername.setBounds(160, 27, 180, 24);
         tfusername.setBorder(BorderFactory.createEmptyBorder());
