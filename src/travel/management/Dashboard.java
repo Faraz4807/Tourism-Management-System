@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Dashboard extends JFrame {
+String username;
 
-    Dashboard() {
+    Dashboard(String username) {
+        this.username = username;
         // setBounds(0,0,1500,1000);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(null);
@@ -173,33 +175,10 @@ public class Dashboard extends JFrame {
         text.setForeground(new Color(255, 255, 255));
         icon2.add(text);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Dashboard();
+        new Dashboard("");
     }
 }

@@ -19,6 +19,7 @@ public class Loading extends JFrame implements Runnable {
                     bar.setValue(bar.getValue() + 1);
                 } else {
                     setVisible(false);
+                    new Dashboard(username);
                     // new class object
                 }
                 Thread.sleep(30);
