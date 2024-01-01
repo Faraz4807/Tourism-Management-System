@@ -2,9 +2,12 @@ package travel.management;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionListener;
 
-public class Dashboard extends JFrame {
+public class Dashboard extends JFrame implements ActionListener{
 String username;
+JButton addPersonDetail ,viewDetail,updatePersonDetail ;
 
     Dashboard(String username) {
         this.username = username;
@@ -36,16 +39,18 @@ String username;
         p2.setBounds(10, 60, 300, 680);
         add(p2);
 
-        JButton addPersonDetail = new JButton("Person-Deatils");
+        addPersonDetail = new JButton("Add Person-Deatils");
         addPersonDetail.setBounds(5, 5, 290, 35);
         addPersonDetail.setBackground(new Color(138, 139, 148));
         addPersonDetail.setForeground(new Color(255, 255, 255));
         // addPersonDetail.setMargin(new Insets(0, 0, 0, 80));
         addPersonDetail.setFont(new Font("Raleway", Font.BOLD, 20));
+        addPersonDetail.addActionListener(this);
+
 
         p2.add(addPersonDetail);
 
-        JButton updatePersonDetail = new JButton("Addd Personal Deatils");
+        updatePersonDetail = new JButton("Update Personal Deatils");
         updatePersonDetail.setBounds(5, 45, 290, 35);
         updatePersonDetail.setBackground(new Color(138, 139, 148));
         updatePersonDetail.setForeground(new Color(255, 255, 255));
@@ -54,12 +59,13 @@ String username;
 
         p2.add(updatePersonDetail);
 
-        JButton viewDetail = new JButton("Update Personal Deatils");
+        viewDetail = new JButton("View Deatils");
         viewDetail.setBounds(5, 85, 290, 35);
         viewDetail.setBackground(new Color(138, 139, 148));
         viewDetail.setForeground(new Color(255, 255, 255));
         // viewDetail.setMargin(new Insets(0, 0, 0, 80));
         viewDetail.setFont(new Font("Raleway", Font.BOLD, 20));
+        viewDetail.addActionListener(this);
 
         p2.add(viewDetail);
 
@@ -177,6 +183,17 @@ String username;
 
         setVisible(true);
     }
+    public void actionPerformed(ActionEvent ae){
+        if (ae.getSource()==addPersonDetail) {
+            new AddCustomer(username);
+        }else if(ae.getSource()==viewDetail){
+            new View(username);
+
+        }else if (ae.getSource()==updatePersonDetail) {
+            new UpdateCustomer(username);
+        }
+    }
+
 
     public static void main(String[] args) {
         new Dashboard("");

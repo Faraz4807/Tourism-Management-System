@@ -1,25 +1,30 @@
-
 package travel.management;
 // import java.awt.EventQueue;
 import javax.swing.*;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-
-public class AddCustomer extends JFrame implements ActionListener {
-
-    JLabel lblusername, lblid, lblnumber, lblname, lblgender, lblcountry, lbladdress, lblemail, lblphone;
+public class UpdateCustomer  extends JFrame implements ActionListener{
+    JLabel lblusername, lblid, lblnumber, lblname, lblgender, lblcountry, lbladdress, lblemail, lblphone, lbltext;
     // Choice IDs;
     JComboBox<String> comfid;
-    JTextField tfnumber, tfname, tfcountry, tfaddress, tfemail, tfphone;
+    JTextField tfnumber, tfname, tfcountry, tfaddress, tfemail, tfphone , tfid ,tfgender;
     JRadioButton rmale, rfemale;
     JButton add, back;
 
-    AddCustomer(String username) {
-        setBounds(250, 100, 850, 550);
+    UpdateCustomer(String username) {
+        setBounds(400, 150, 850, 550);
         setLayout(null);
         getContentPane().setBackground(new Color(250, 203, 234));
+
+         lbltext =new JLabel("UPDATE CUSTOMER DETAILS");
+         lbltext.setBounds(50,0,300,25);
+         lbltext.setFont(new Font("Tahoma",Font.BOLD,20));
+         add(lbltext);
 
         lblusername = new JLabel("Username");
         lblusername.setBounds(40, 30, 100, 50);
@@ -45,12 +50,17 @@ public class AddCustomer extends JFrame implements ActionListener {
         // IDs.setFont(new Font("SAN SERIF", Font.BOLD, 12));
         // add(IDs);
 
-        String[] subjects = { "Aadhar Card", "Pssport", "Pan Card" };
-        comfid = new JComboBox<>(subjects);
-        comfid.setBounds(240, 90, 180, 24);
-        comfid.setBackground(new Color(250, 203, 234));
-        comfid.setFont(new Font("Tahoma", Font.BOLD, 13));
-        add(comfid);
+        // String[] subjects = { "Aadhar Card", "Passport", "Pan Card" };
+        // comfid = new JComboBox<>(subjects);
+        // comfid.setBounds(240, 90, 180, 24);
+        // comfid.setBackground(new Color(250, 203, 234));
+        // comfid.setFont(new Font("Tahoma", Font.BOLD, 13));
+        // add(comfid);
+
+           tfid = new JTextField();
+         tfid.setBounds(240, 90, 180, 24);
+         tfid.setBorder(BorderFactory.createEmptyBorder());
+        add( tfid);
 
         lblnumber = new JLabel("Number");
         lblnumber.setBounds(40, 125, 100, 50);
@@ -82,21 +92,26 @@ public class AddCustomer extends JFrame implements ActionListener {
         lblgender.setFont(new Font("Tahoma", Font.BOLD, 13));
         add(lblgender);
 
-        rmale = new JRadioButton("Male");
-        rmale.setBounds(240, 234, 60, 20);
-        rmale.setBackground(new Color(250, 203, 234));
-        rmale.setFont(new Font("Tahoma", Font.BOLD, 13));
-        add(rmale);
+        // rmale = new JRadioButton("Male");
+        // rmale.setBounds(240, 234, 60, 20);
+        // rmale.setBackground(new Color(250, 203, 234));
+        // rmale.setFont(new Font("Tahoma", Font.BOLD, 13));
+        // add(rmale);
 
-        rfemale = new JRadioButton("Female");
-        rfemale.setBounds(350, 234, 80, 20);
-        rfemale.setBackground(new Color(250, 203, 234));
-        rfemale.setFont(new Font("Tahoma", Font.BOLD, 13));
-        add(rfemale);
+        // rfemale = new JRadioButton("Female");
+        // rfemale.setBounds(350, 234, 80, 20);
+        // rfemale.setBackground(new Color(250, 203, 234));
+        // rfemale.setFont(new Font("Tahoma", Font.BOLD, 13));
+        // add(rfemale);
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(rmale);
         bg.add(rfemale);
+
+         tfgender = new JTextField();
+        tfgender.setBounds(240, 240, 180, 24);
+        tfgender.setBorder(BorderFactory.createEmptyBorder());
+        add(tfgender);
 
         lblcountry = new JLabel("Country");
         lblcountry.setBounds(40, 270, 100, 50);
@@ -130,7 +145,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
         lblphone = new JLabel("Phone No");
         lblphone.setBounds(40, 400, 100, 50);
-        lblphone.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblphone.setFont(new Font("Tahoma", Font.BOLD, 13));  
         add(lblphone);
 
         tfphone = new JTextField();
@@ -138,8 +153,8 @@ public class AddCustomer extends JFrame implements ActionListener {
         tfphone.setBorder(BorderFactory.createEmptyBorder());
         add(tfphone);
 
-        add = new JButton("Add");
-        add.setBounds(200, 460, 80, 25);
+        add = new JButton("Update");
+        add.setBounds(220, 460, 100, 25);
         add.setForeground(new Color(255, 255, 255));
         add.setBackground(new Color(54, 47, 217));
         add.setFont(new Font("SAN SERIF", Font.BOLD, 15));
@@ -155,7 +170,7 @@ public class AddCustomer extends JFrame implements ActionListener {
         back.addActionListener(this);
         add(back);
 
-        ImageIcon t1 = new ImageIcon(ClassLoader.getSystemResource("icons/newcus2.png"));
+        ImageIcon t1 = new ImageIcon(ClassLoader.getSystemResource("icons/update.png"));
         Image t2 = t1.getImage().getScaledInstance(270, 400, Image.SCALE_DEFAULT);
         ImageIcon t3 = new ImageIcon(t2);
         JLabel image = new JLabel(t3);
@@ -165,10 +180,20 @@ public class AddCustomer extends JFrame implements ActionListener {
         try {
 
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from account where username = '"+username+"' ");
+            ResultSet rs = c.s.executeQuery("select * from customer where username = '"+username+"' ");
             while (rs.next()) {
                 lblusername.setText(rs.getString("username"));
                 lblname.setText(rs.getString("name"));
+                tfid.setText(rs.getString("id"));
+                tfnumber.setText(rs.getString("number"));
+                tfgender.setText(rs.getString("gender"));
+                tfcountry.setText(rs.getString("country"));
+                tfaddress.setText(rs.getString("address"));
+                tfphone.setText(rs.getString("phone"));
+                tfemail.setText(rs.getString("email"));
+               
+
+
 
             }
         } catch (Exception e) {
@@ -181,43 +206,37 @@ public class AddCustomer extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == add) {
             String username = lblusername.getText();
-            String id1 =(String) comfid.getSelectedItem();
-            String number  = tfnumber.getText();
+            String id1 = tfid.getText();
+            String number = tfnumber.getText();
             String name = lblname.getText();
-            String gender = null;
-            if(rmale.isSelected()){
-                gender = "Male";
-            }else{
-                gender="Female";
-            }
-            String country = tfcountry .getText();
+            String gender = tfgender.getText();
+            String country = tfcountry.getText();
             String address = tfaddress.getText();
-            String phone  = tfphone.getText();
+            String phone = tfphone.getText();
             String email = tfemail.getText();
 
             try {
                 Conn c = new Conn();
-                String query = "insert into customer values ('" + username + "' , '" + id1 + "' , '" + name + "' , '" + number + "' , '"
-                + gender + "' , '" + country+ "' , '" + address+ "' , '" +phone+ "' , '" +email+ "')";
+                String query = "update  customer set  username ='" + username + "' , id ='" + id1 + "' ,name= '" + name + "' ,number =  '"
+                        + number + "' , gender ='"
+                        + gender + "' , country ='" + country + "' ,address = '" + address + "' ,phone = '" + phone + "' ,email= '" + email + "'";
                 c.s.executeUpdate(query);
 
-                JOptionPane.showMessageDialog(null , "Customer DEtails Added Successfully");
+                JOptionPane.showMessageDialog(null, "Customer Details Updated Successfully");
                 setVisible(false);
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
         } else {
             setVisible(false);
         }
 
-        
     }
 
     public static void main(String[] args) {
-        new AddCustomer("Beeta");
+        new UpdateCustomer("Beeta");
     }
+    
 }
